@@ -1,1 +1,10 @@
-$ git clone https://github.com/open6254/open62541.git
+$ git clone$
+$ cd open62541_x86
+$ git submodule update --init --recursive
+$ mkdir build
+$ cd build
+$ cmake .. -DUA_ENABLE_AMALGAMATION=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_
+$ make
+
+
+
