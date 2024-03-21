@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(simple_cliser)
+
+SET(CMAKE_C_COMPILER	gcc)
+SET(CMAKE_CXX_COMPILER	g++)
+
+set (EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+set (OPEN62541_DIR ${PROJECT_SOURCE_DIR}/open62541)
+set (OPEN62541_INCLUDE_DIR ${OPEN62541_DIR})
+set (OPEN62541_LIB_DIR ${OPEN62541_DIR}/bin)
+
+add_definitions(-std=c99)
+
+include_directories(${OPEN62541_INCLUDE_DIR})
+link_directories(${OPEN62541_LIB_DIR})
+
+add_executable(monitor_server ${PROJECT_SOURCE_DIR}/../src/monitor_server.c)
+target_link_libraries(monitor_server libopen62541.so pthread)
+
+#add_executable(simple_client ${PROJECT_SOURCE_DIR}/../src/simple_client.c)
+#target_link_libraries(simple_client libopen62541.so)
