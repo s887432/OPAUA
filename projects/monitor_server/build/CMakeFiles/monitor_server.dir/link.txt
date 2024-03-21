@@ -1,1 +1,0 @@
-gcc    CMakeFiles/monitor_server.dir/home/user/WorkArea/app/opcua/projects/src/monitor_server.c.o  -o ../bin/monitor_server   -L/home/user/WorkArea/app/opcua/projects/monitor_server/open62541/bin  -Wl,-rpath,/home/user/WorkArea/app/opcua/projects/monitor_server/open62541/bin -lopen62541 -lpthread 
