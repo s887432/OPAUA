@@ -7,9 +7,9 @@ int main(int argc, char **argv)
 {
 	char conn_info[256];
 	
-	if( argc != 2 )
+	if( argc != 3 )
 	{
-		printf("USAGE: client SERVER_IP\r\n");
+		printf("USAGE: client SERVER_IP NEW_VALUE\r\n");
 		return EXIT_FAILURE;
 	}
 	
@@ -37,23 +37,23 @@ int main(int argc, char **argv)
 		UA_Int32 variableValue = *(UA_Int32 *)value.data;
 		UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Variable value is %d\n", variableValue);
 	}
+	else
+	{
+		UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Request data error: %d\n", retval);
+	}
 	
 	// write
-	UA_Int32 change = 100;
+	UA_Int32 change = atoi(argv[2]);
 	UA_Variant newValue;
 	UA_Variant_setScalar(&newValue, &change, &UA_TYPES[UA_TYPES_INT32]);
-	UA_Variant_init(&newValue);
 	retval = UA_Client_writeValueAttribute(client, nodeId, &newValue);	
 
-	printf("1\r\n");
 	if( retval == UA_STATUSCODE_GOOD )
 	{
-		printf("2\r\n");
 		retval = UA_Client_readValueAttribute(client, nodeId, &value);
 	
 		if( retval == UA_STATUSCODE_GOOD && UA_Variant_hasScalarType(&value, &UA_TYPES[UA_TYPES_INT32]))
 		{	
-			printf("3\r\n");
 			UA_Int32 variableValue = *(UA_Int32 *)value.data;
 			UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_USERLAND, "Variable new value is %d\n", variableValue);
 		}	
