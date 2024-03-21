@@ -18,4 +18,5 @@ link_directories(${OPEN62541_LIB_DIR})
 add_executable(method_server_01 ${PROJECT_SOURCE_DIR}/../src/method_server_01.c)
 target_link_libraries(method_server_01 libopen62541.so)
 
-
+add_executable(method_client_01 ${PROJECT_SOURCE_DIR}/../src/method_client_01.c)
+target_link_libraries(method_client_01 libopen62541.so)
