@@ -41,11 +41,6 @@ int show_ip(const char *adapter)
 
 UA_Boolean running = true;
 
-static void signal_handler(int signum)
-{
-	printf("Signal %d (bumber) captured\r\n", signum);
-}
-
 static void stopHandler(int sign) 
 {
 	UA_LOG_INFO(UA_Log_Stdout, UA_LOGCATEGORY_SERVER, "received ctrl-a");
@@ -55,7 +50,7 @@ static void stopHandler(int sign)
 static void addVariable(UA_Server *server)
 {
 	UA_VariableAttributes attr = UA_VariableAttributes_default;
-	UA_Int32 myInteger = 43;
+	UA_Int32 myInteger = 42;
 
 	UA_Variant_setScalar(&attr.value, &myInteger, &UA_TYPES[UA_TYPES_INT32]);
 	
@@ -78,7 +73,6 @@ int main(int argc, char **argv)
 {
 	show_ip("eth0");
 
-	signal(SIGILL, signal_handler);
 	signal(SIGINT, stopHandler);
 	signal(SIGTERM, stopHandler);
 	
